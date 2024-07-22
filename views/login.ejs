@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/header'); -%>
+
+<body>
+    <%- include('layouts/navbar')  -%>
+    <!-- Page header -->
+    <header class="masthead">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1 id="login_heading">Login</h1>
+                        <span class="subheading">Join today to book and acquire your test details.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main>
+        <div id="login_container">
+            <form id="login_form" action="/loginUser" method="post">
+                <div class="row mb-3 justify-content-center">
+                    <label for="login_username" class="col-sm-2 col-form-label">Username: </label>
+                    <div class="col-auto">
+                        <input type="email" class="form-control" id="login_username" name="login_username" placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="login_password" class="col-sm-2 col-form-label">Password: </label>
+                    <div class="col-auto">
+                        <input type="password" class="form-control" id="login_password" name="login_password" placeholder="Enter password">
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <button type="submit" class="btn btn-primary col-sm-2">Sign In</button>
+                </div>
+            </form>
+            <div class="row mb-3 justify-content-center">
+                <p class="col-auto"><a id="signup_link" href="/login" class="link-info">Don't have an account? Create account and sign up</a></p>
+            </div>
+        </div>
+    
+        <div id="signup_container">
+            <form id="signup_form" action="/signupUser" method="post">
+                <div class="row mb-3 justify-content-center">
+                    <label for="username" class="col-sm-2 col-form-label">Create Username: </label>
+                    <div class="col-auto">
+                        <input type="email" class="form-control" id="username" name="username" placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="user_type" class="col-sm-2 col-form-label">Select UserType: </label>
+                    <div class="col-auto">
+                        <select class="form-select" name="user_type" id="user_type">
+                            <option disabled>Please Select A Option</option>
+                            <option value="Driver">Driver</option>
+                            <option value="Examiner">Examiner</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="password" class="col-sm-2 col-form-label">Create Password: </label>
+                    <div class="col-auto">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="confirm_password" class="col-sm-2 col-form-label">Confirm Password: </label>
+                    <div class="col-auto">
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password">
+                    </div>
+                </div>
+
+                <h2 class="row mb-5 justify-content-center">Personal Information</h2>
+                
+                <div class="row mb-3 justify-content-center">
+                    <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter First Name">
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Last Name">
+                    </div>
+                    
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="license" class="col-sm-2 col-form-label">License Number</label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="license" id="license" placeholder="Enter License No.">
+                    </div>
+                    
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="age" class="col-sm-2 col-form-label">Age</label>
+                    <div class="col-auto">
+                        <input type="number" class="form-control" name="age" id="age" placeholder="Enter Age">
+                    </div>
+                    
+                </div>
+                <div class="row mb-3 justify-content-center">
+                    <label for="dob" class="col-sm-2 col-form-label">Date Of Birth</label>
+                    <div class="col-auto">
+                        <input type="date" class="form-control w-100" name="dob" id="dob">
+                    </div>
+                </div>
+
+                <h2 class="row mb-5 justify-content-center">Car Information</h2>
+
+            <div class="row mb-3 justify-content-center">
+                <label for="car_make" class="col-sm-2 col-form-label">Make</label>
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="car_make" id="car_make" placeholder="Enter Make">
+                </div>
+                
+            </div>
+            <div class="row mb-3 justify-content-center">
+                <label for="car_model" class="col-sm-2 col-form-label">Model</label>
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="car_model" id="car_model" placeholder="Enter Model">
+                </div>
+                
+            </div>
+            <div class="row mb-3 justify-content-center">
+                <label for="car_year" class="col-sm-2 col-form-label">Year</label>
+                <div class="col-auto">
+                    <input type="number" class="form-control" name="car_year" id="car_year" placeholder="Enter Year">
+                </div>
+            </div>
+            <div class="row mb-3 justify-content-center">
+                <label for="car_plate" class="col-sm-2 col-form-label">Plate Number</label>
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No.">
+                </div>
+                
+            </div>
+                <div class="row mb-3 justify-content-center">
+                    <button id="submit_signup" type="submit" class="btn btn-primary col-sm-2">Sign Up</button>
+                </div>
+            </form>
+            <div class="row mb-3 justify-content-center">
+                <p class="col-auto"><a id="login_link" href="#" class="link-info">Already have an account? Sign In</a></p>
+            </div>
+        </div>
+    </main>
+    <hr>
+    <%- include('layouts/footer'); -%>
+    <%- include('layouts/scripts')  -%>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/header'); -%>
+
+<body>
+    <%- include('layouts/navbar')  -%>
+    <!-- Page header -->
+    <header class="masthead">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>G Test</h1>
+                        <span class="subheading">Get G_TEST Details</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="col justify-content-center">
+        <form action="/updateDetails" method="post">
+            <% if (user) { %>
+            <h2>Personal Information</h2>
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" readonly value="<%= user.firstname %>">
+                
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" readonly value="<%= user.lastname %>">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                    <input type="number" class="form-control" name="age" id="age" readonly value="<%= user.age %>">
+            </div>
+            <div class="form-group">
+                <label for="dob">Date Of Birth</label>
+                    <input type="text" class="form-control" name="dob" id="dob" readonly value="<%= user.dob %>">
+            </div>
+            <h2>Car Information</h2>
+            <div class="form-group">
+                <label for="car_make">Make</label>
+                <input type="text" class="form-control" name="car_make" id="car_make" placeholder="Enter Make" value="<%= user.car_details.make %>">
+                <label for="car_model">Model</label>
+                <input type="text" class="form-control" name="car_model" id="car_model" placeholder="Enter Model" value="<%= user.car_details.model %>">
+                <label for="car_year">Year</label>
+                <input type="number" class="form-control" name="car_year" id="car_year" placeholder="Enter Year" value="<%= user.car_details.year %>">
+                <label for="car_plate">Plate Number</label>
+                <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No." value="<%= user.car_details.platno %>">
+            </div>
+            <input type="hidden" name="mongo_id" value="<%= user._id %>" readonly>
+            <div class="row mb-3 justify-content-sm-center">
+                <button id="update_button" type="submit" class="btn btn-primary col-sm-2">Update</button>
+            </div>
+            <% } %>
+        </form> 
+    </main>
+    <hr>
+    <%- include('layouts/footer'); -%>
+    <%- include('layouts/scripts')  -%>
+</body>
+</html>
