@@ -53,8 +53,23 @@ const UserSchema = new Schema({
     platno: {
         type: String,
         default: "default"
-    
     }
+    },
+    appointment_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Appointment"
+    },
+    testType: {
+        type: String,
+        default: "default"
+    },
+    comment: {
+        type: String,
+        default: "default"
+    },
+    pass_fail: {
+        type: Boolean,
+        default: false
     }
 });
 UserSchema.pre('save', function(next){

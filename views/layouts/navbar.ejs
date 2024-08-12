@@ -13,6 +13,13 @@
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/g2_page">G2_TEST</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/g_page">G_TEST</a></li>
                 <% } %>
+                <% if (user && user.user_type == "Admin"){ %>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/appointment">Appointment</a></li>
+                <% } %>
+                <% if (user && user.user_type == "Examiner"){ %>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/examiner">Examiner</a></li>
+                <% } %>
+
                 <% if (user && user._id) { %> 
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">LOGOUT</a></li>
                 <% } else { %>

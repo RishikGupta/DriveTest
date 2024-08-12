@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body>
+        <%- include('layouts/navbar') -%>
+            <!-- Page header -->
+            <header class="masthead">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Appointments</h1>
+                                <span class="subheading">Set Appointment Slots</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <form id="appointment_date_form" action="/appointment" method="post">
+                    <label for="appointment_date">Select date: </label>
+                    <% if(appointment_date != undefined){ %>
+                    <input id="appointment_date" name="appointment_date" type="date" value="<%= appointment_date %>">
+                    <% } else {%>
+                        <input id="appointment_date" name="appointment_date" type="date">
+                    <% } %>
+                    <button type="submit" id="check_slots">Check slots</button>
+                </form>
+                <% if(appointment_slots != undefined){ %>
+                <form id="appointment_form" action="/appointment" method="post">
+                    <div id="appointment_slots">
+                        <h2>Select appointment slot</h2>
+                        <% if(!appointment_slots.some(item => item.appointment_time === '09:00')){ %>
+                            <button type="submit" id="time_1" name="time_1" class="time_slots" value="09:00">09:00 AM</button>
+                        <% } else { %>
+                            <button type="submit" id="time_1" name="time_1" class="time_slots" value="09:00" disabled>09:00 AM</button>
+                        <% } %>
+                        <% if(!appointment_slots.some(item => item.appointment_time === '10:00')){ %>
+                            <button type="submit" id="time_2" name="time_2" class="time_slots" value="10:00">10:00 AM</button>
+                        <% } else { %>
+                            <button type="submit" id="time_2" name="time_2" class="time_slots" value="10:00" disabled>10:00 AM</button>
+                        <% } %>
+                        <% if(!appointment_slots.some(item => item.appointment_time === '11:00')){ %>
+                            <button type="submit" id="time_3" name="time_3" class="time_slots" value="11:00">11:00 AM</button>
+                        <% } else { %>
+                            <button type="submit" id="time_3" name="time_3" class="time_slots" value="11:00" disabled>11:00 AM</button>
+                        <% } %>
+                        <% if(!appointment_slots.some(item => item.appointment_time === '12:00')){ %>
+                            <button type="submit" id="time_4" name="time_4" class="time_slots" value="12:00">12:00 PM</button>
+                        <% } else { %>
+                            <button type="submit" id="time_4" name="time_4" class="time_slots" value="12:00" disabled>12:00 PM</button>
+                        <% } %>
+                        <% if(!appointment_slots.some(item => item.appointment_time === '13:00')){ %>
+                            <button type="submit" id="time_5" name="time_5" class="time_slots" value="13:00">1:00 PM</button>
+                        <% } else { %>
+                            <button type="submit" id="time_5" name="time_5" class="time_slots" value="13:00" disabled>1:00 PM</button>
+                        <% } %>
+                        <% if(!appointment_slots.some(item => item.appointment_time === '14:00')){ %>
+                            <button type="submit" id="time_6" name="time_6" class="time_slots" value="14:00">2:00 PM</button>
+                        <% } else { %>
+                            <button type="submit" id="time_6" name="time_6" class="time_slots" value="14:00" disabled>2:00 PM</button>
+                        <% } %>
+                    </div>
+                    <input type="hidden" id="selected_time" name="selected_time">
+                    <input type="hidden" id="appointment_date" name="appointment_date" value=<%= appointment_date %>>
+                </form>
+                <% } %>
+                <% for(user of usersArray) { %>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= user.username %></h5>
+                                    <p class="card-text">Firstname: <%= user.firstname %></p>
+                                    <p class="card-text">Lastname: <%= user.lastname %></p>
+                                    <p class="card-text">TestType: <%= user.testType %></p>
+                                    <% if (user.pass_fail) {  %>
+                                        <p class="card-text">Test Result: Pass</p>
+                                    <% } else { %>
+                                        <p class="card-text">Test Result: Fail</p>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </main>
+            <hr>
+            <%- include('layouts/footer'); -%>
+                <%- include('layouts/scripts') -%>
+    </body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body>
+        <%- include('layouts/navbar') -%>
+            <!-- Page header -->
+            <header class="masthead">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Examiner</h1>
+                                <span class="subheading">Examine and Remark Drive Tests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row m-3 justify-content-evenly">
+                <button id="g_appointments_button" class="col-md-3">Get G Appointments</button>
+                <button id="g2_appointments_button" class="col-md-3">Get G2 Appointments</button>
+                </div>
+                
+                <div id="g_appointments_container" style="display: none;">
+                    <h2>G Appointments</h2>
+                    <% for( const userApp of gAppointments ){ %>
+                        <form action="/examinerUpdate" method="post">
+                            <div class="form-group">
+                                <label for="appointment_date">Appointment Date</label>
+                                <input type="text" class="form-control" name="appointment_date" id="appointment_date" value="<%= userApp.appointment.appointment_date %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="appointment_time">Appointment Time</label>
+                                <input type="time" class="form-control" name="appointment_time" id="appointment_time" value="<%= userApp.appointment.appointment_slot.appointment_time %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="login_username" class="col-sm-2 col-form-label">Username: </label>
+                                <input type="email" class="form-control" id="login_username" name="login_username" value="<%= userApp.user.username %>" disabled>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name" disabled value="<%= userApp.user.firstname %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" disabled value="<%= userApp.user.lastname %>">
+                            </div>
+                            <h2>Car Information</h2>
+                            <div class="form-group">
+                                <label for="car_make">Make</label>
+                                <input type="text" class="form-control" name="car_make" id="car_make" placeholder="Enter Make" value="<%= userApp.user.car_details.make %>" disabled>
+                                <label for="car_model">Model</label>
+                                <input type="text" class="form-control" name="car_model" id="car_model" placeholder="Enter Model" value="<%= userApp.user.car_details.model %>" disabled>
+                                <label for="car_year">Year</label>
+                                <input type="number" class="form-control" name="car_year" id="car_year" placeholder="Enter Year" value="<%= userApp.user.car_details.year %>" disabled>
+                                <label for="car_plate">Plate Number</label>
+                                <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No." value="<%= userApp.user.car_details.platno %>" disabled>
+                            </div>
+                            <div>
+                                <label for="comment">Comment</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="3"><%= userApp.user.comment %></textarea>
+                            </div>
+                            <div>
+                                <label for="pass_fail">Pass/Fail</label>
+                                <select class="form-control" id="pass_fail" name="pass_fail">
+                                    <% if(userApp.user.pass_fail) {  %>
+                                        <option value="" disabled selected>Pass</option>
+                                     <% } else { %>
+                                        <option value="" disabled selected>Fail</option>
+                                     <% } %>
+                                    <option value="true">Pass</option>
+                                    <option value="false">Fail</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="mongo_id" value="<%= userApp.user._id %>" disabled>
+                            
+                            <div class="row m-3 p-3 justify-content-sm-center border-bottom">
+                                <button id="update_button" type="submit" class="btn btn-primary col-sm-2">Update</button>
+                            </div> 
+                        </form>
+                        <% } %>
+                </div>
+                <div id="g2_appointments_container" style="display: none;">
+                    <h2>G2 Appointments</h2>
+                    <% for( const userApp of g2Appointments ){ %>
+                        <form action="/examinerUpdate" method="post">
+                            <div class="form-group">
+                                <label for="appointment_date">Appointment Date</label>
+                                <input type="text" class="form-control" name="appointment_date" id="appointment_date" value="<%= userApp.appointment.appointment_date  %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="appointment_time">Appointment Time</label>
+                                <% if(userApp.appointment.appointment_slot.appointment_time) %>
+                                <input type="time" class="form-control" name="appointment_time" id="appointment_time" value="<%= userApp.appointment.appointment_slot.appointment_time %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="login_username" class="col-sm-2 col-form-label">Username: </label>
+                                <input type="email" class="form-control" id="login_username" name="login_username" value="<%= userApp.user.username %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name" value="<%= userApp.user.firstname %>" disabled>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" value="<%= userApp.user.lastname %>" disabled>
+                            </div>
+                            <h2>Car Information</h2>
+                            <div class="form-group">
+                                <label for="car_make">Make</label>
+                                <input type="text" class="form-control" name="car_make" id="car_make" placeholder="Enter Make" value="<%= userApp.user.car_details.make %>" disabled>
+                                <label for="car_model">Model</label>
+                                <input type="text" class="form-control" name="car_model" id="car_model" placeholder="Enter Model" value="<%= userApp.user.car_details.model %>" disabled>
+                                <label for="car_year">Year</label>
+                                <input type="number" class="form-control" name="car_year" id="car_year" placeholder="Enter Year" value="<%= userApp.user.car_details.year %>" disabled>
+                                <label for="car_plate">Plate Number</label>
+                                <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No." value="<%= userApp.user.car_details.platno %>" disabled>
+                            </div>
+                            <div>
+                                <label for="comment">Comment</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="3"><%= userApp.user.comment %></textarea>
+                            </div>
+                            <div>
+                                <label for="pass_fail">Pass/Fail</label>
+                                <select class="form-control" id="pass_fail" name="pass_fail">
+                                    <% if(userApp.user.pass_fail) {  %>
+                                        <option value="" disabled selected>Pass</option>
+                                     <% } else { %>
+                                        <option value="" disabled selected>Fail</option>
+                                     <% } %>
+                                    <option value="true">Pass</option>
+                                    <option value="false">Fail</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="mongo_id" value="<%= userApp.user._id %>" disabled>
+                            <div class="row m-3 p-3 justify-content-sm-center border-bottom">
+                                <button id="update_button" type="submit" class="btn btn-primary col-sm-2">Update</button>
+                            </div> 
+                        </form>
+                        <% } %>
+                </div>
+            </main>
+            <hr>
+            <%- include('layouts/footer'); -%>
+                <%- include('layouts/scripts') -%>
+    </body>
+
+</html>

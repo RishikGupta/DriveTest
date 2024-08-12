@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dob">Date Of Birth</label>
-                            <input type="text" class="form-control" name="dob" id="dob" value="<%= user.dob %>">
+                            <input type="date" class="form-control" name="dob" id="dob" value="<%= user.dob %>">
                     </div>
                     <div class="form-group">
                         <label for="license_no">License No.</label>
@@ -55,7 +55,7 @@
                         <label for="car_plate">Plate Number</label>
                         <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No." value="<%= user.car_details.platno %>">
                     </div>
-                    <input type="hidden" name="mongo_id" value="<%= user._id %>" readonly>
+                    <input type="hidden" name="mongo_id" value="<%= user._id %>" disabled>
                 <div class="row mb-3 justify-content-sm-evenly">
                     <button id="submit" type="submit" class="btn btn-primary col-sm-2">Submit</button>
                     <button id="clear" type="submit" class="btn btn-primary col-sm-2">Clear</button>
@@ -67,36 +67,72 @@
             <h2>Personal Information</h2>
             <div class="form-group">
                 <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="first_name" value="<%= user.firstname %>" readonly>
+                    <input type="text" class="form-control" name="first_name" id="first_name" value="<%= user.firstname %>" disabled>
                 
             </div>
             <div class="form-group">
                 <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="last_name" value="<%= user.lastname %>" readonly>
+                    <input type="text" class="form-control" name="last_name" id="last_name" value="<%= user.lastname %>" disabled>
             </div>
             <div class="form-group">
                 <label for="age">Age</label>
-                    <input type="number" class="form-control" name="age" id="age" value="<%= user.age %>" readonly>
+                    <input type="number" class="form-control" name="age" id="age" value="<%= user.age %>" disabled>
             </div>
             <div class="form-group">
                 <label for="dob">Date Of Birth</label>
-                    <input type="text" class="form-control" name="dob" id="dob" value="<%= user.dob %>" readonly>
+                    <input type="date" class="form-control" name="dob" id="dob" value="<%= user.dob %>" disabled>
             </div>
             <h2>Car Information</h2>
             <div class="form-group">
                 <label for="car_make">Make</label>
-                <input type="text" class="form-control" name="car_make" id="car_make" placeholder="Enter Make" value="<%= user.car_details.make %>" readonly>
+                <input type="text" class="form-control" name="car_make" id="car_make" placeholder="Enter Make" value="<%= user.car_details.make %>" disabled>
                 <label for="car_model">Model</label>
-                <input type="text" class="form-control" name="car_model" id="car_model" placeholder="Enter Model" value="<%= user.car_details.model %>" readonly>
+                <input type="text" class="form-control" name="car_model" id="car_model" placeholder="Enter Model" value="<%= user.car_details.model %>" disabled>
                 <label for="car_year">Year</label>
-                <input type="number" class="form-control" name="car_year" id="car_year" placeholder="Enter Year" value="<%= user.car_details.year %>" readonly>
+                <input type="number" class="form-control" name="car_year" id="car_year" placeholder="Enter Year" value="<%= user.car_details.year %>" disabled>
                 <label for="car_plate">Plate Number</label>
-                <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No." value="<%= user.car_details.platno %>" readonly>
+                <input type="text" class="form-control" name="car_plate" id="car_plate" placeholder="Enter Plate No." value="<%= user.car_details.platno %>" disabled>
             </div>
-        <% } %>
-            
-            
+        <% } %>   
         </form>
+        <% if (user && !defaultLicense) { %>
+        <form id="appointment_date_form" action="/g2_page" method="post">
+            <label for="appointment_date">Select date: </label>
+            <% if(appointment_date != undefined){ %>
+            <input id="appointment_date" name="appointment_date" type="date" value="<%= appointment_date %>">
+            <% } else {%>
+                <input id="appointment_date" name="appointment_date" type="date">
+            <% } %>
+            <button type="submit" id="check_slots">Check slots</button>
+        </form>
+        <% if(appointment_slots != undefined){ %>
+        <form id="appointment_form" action="/g2_page" method="post">
+            <div id="appointment_slots">
+                <h2>Select appointment slot</h2>
+                <% if(appointment_slots.some(item => item.appointment_time === '09:00' && item.isTimeSlotAvailable == true)){ %>
+                    <button type="submit" id="time_1" name="time_1" class="time_slots" value="09:00">09:00 AM</button>
+                <% } %>
+                <% if(appointment_slots.some(item => item.appointment_time === '10:00' && item.isTimeSlotAvailable == true)){ %>
+                    <button type="submit" id="time_2" name="time_2" class="time_slots" value="10:00">10:00 AM</button>
+                <% } %>
+                <% if(appointment_slots.some(item => item.appointment_time === '11:00' && item.isTimeSlotAvailable == true)){ %>
+                    <button type="submit" id="time_3" name="time_3" class="time_slots" value="11:00">11:00 AM</button>
+                <% } %>
+                <% if(appointment_slots.some(item => item.appointment_time === '12:00' && item.isTimeSlotAvailable == true)){ %>
+                    <button type="submit" id="time_4" name="time_4" class="time_slots" value="12:00">12:00 PM</button>
+                <% } %>
+                <% if(appointment_slots.some(item => item.appointment_time === '13:00' && item.isTimeSlotAvailable == true)){ %>
+                    <button type="submit" id="time_5" name="time_5" class="time_slots" value="13:00">1:00 PM</button>
+                <% } %>
+                <% if(appointment_slots.some(item => item.appointment_time === '14:00' && item.isTimeSlotAvailable == true)){ %>
+                    <button type="submit" id="time_6" name="time_6" class="time_slots" value="14:00">2:00 PM</button>
+                <% } %>    
+            </div>
+            <input type="hidden" id="selected_time" name="selected_time">
+            <input type="hidden" id="appointment_date" name="appointment_date" value=<%= appointment_date %>>
+        </form>
+        <% } %>
+        <% } %>
     </main>
     <hr>
     <%- include('layouts/footer'); -%>
