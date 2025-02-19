@@ -33,26 +33,26 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); 
-app.use(express_session({ 
+app.use(bodyParser.json());
+app.use(express_session({
     secret: "rishik7619"
-    }))
+}))
 
 app.post('/signupUser', signupUserPost);
 app.post('/loginUser', validateUserLogin, loginUserPost);
 app.post('/g2_page/submitForm', validateDefaultUserForm, g2FormPostController);
 app.post('/g2_page', validateG2Form, getG2PageController)
 app.post('/updateDetails', gUpdateDetailsPostController);
-app.post('/g_page', validateGForm, getGPageController );
+app.post('/g_page', validateGForm, getGPageController);
 app.post('/appointment', validateAppointment, getAppointmentController);
 app.post('/examinerUpdate', examinerUserPostController);
 
-app.get('/dashboard', getDashboardPageController );
-app.get('/g_page', validateGForm , getGPageController);
-app.get('/g2_page',validateG2Form, getG2PageController );
-app.get('/appointment',validateAppointment, getAppointmentController);
+app.get('/dashboard', getDashboardPageController);
+app.get('/g_page', validateGForm, getGPageController);
+app.get('/g2_page', validateG2Form, getG2PageController);
+app.get('/appointment', validateAppointment, getAppointmentController);
 app.get('/examiner', validateExaminer, getExaminerController);
-app.get('/login', getLoginPageController );
+app.get('/login', getLoginPageController);
 app.get('/', getLoginPageController);
 app.get('/logout', getLogoutController);
 
@@ -60,3 +60,4 @@ app.get('/logout', getLogoutController);
 app.listen(port, () => {
     console.log(`DriveTest Book app listening at http://localhost:${port}`);
 })
+console.log("Is everything working correctly");
